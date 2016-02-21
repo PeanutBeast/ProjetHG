@@ -7,9 +7,6 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 lookPos;
     Rigidbody rigidBody;
 
-    public GameObject bullet;
-    public float BulletSpeed = 10;
-
     public float Speed = 4;
 
     void Start()
@@ -20,7 +17,6 @@ public class PlayerMovement : MonoBehaviour {
     void Update()
     {
         TurnPlayerWithMouse();
-        ShootBullets();
     }
 
     void FixedUpdate()
@@ -51,19 +47,4 @@ public class PlayerMovement : MonoBehaviour {
         transform.LookAt(transform.position + lookDirection, Vector3.up);
     }
 
-    private void ShootBullets()
-    {
-        if (Input.GetButtonDown("Fire1"))
-        {
-
-            Quaternion rotation = transform.rotation;
-
-            // Instantiate the projectile at the position and rotation of this transform
-            GameObject clone;
-            clone = (GameObject)Instantiate(bullet, transform.position, rotation);
-
-            // Add force to the cloned object in the object's forward direction
-            clone.GetComponent<Rigidbody>().AddForce(clone.transform.forward * BulletSpeed);
-        }
-    }
 }
