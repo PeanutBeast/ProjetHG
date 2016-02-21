@@ -8,6 +8,7 @@ public class BulletCollision : MonoBehaviour
 
     public LayerMask layerMask = -1; //make sure we aren't in this layer 
     public float skinWidth = 0.1f; //probably doesn't need to be changed 
+    public float timeToLive = 2;
 
     private float aliveTime;
     private float minimumExtent;
@@ -65,15 +66,19 @@ public class BulletCollision : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
+        if(col.gameObject.name == "Cube")
+        {
+            col.GetComponent<GetHit>().GetHitByBullet();
+        }
+
         Destroy(gameObject);
     }
 
     private void TimeToLive()
     {
-        if(Time.time - aliveTime >= 2)
+        if(Time.time - aliveTime >= timeToLive)
         {
             Destroy(gameObject);
-            Debug.Log("Bullet Died");
         }
     }
 }

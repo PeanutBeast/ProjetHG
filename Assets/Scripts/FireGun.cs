@@ -5,10 +5,13 @@ public class FireGun : MonoBehaviour {
 
     public float BulletSpeed = 10;
     public GameObject bullet;
+    public float RateOfFire = 0.33f;
+
+    private float timeAtLastShot;
 
     // Use this for initialization
     void Start () {
-	
+        timeAtLastShot = Time.time;
 	}
 	
 	// Update is called once per frame
@@ -18,16 +21,21 @@ public class FireGun : MonoBehaviour {
 
     private void ShootBullets()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            Transform bulletExitPoint = GameObject.Find("BulletExitPoint").transform;
 
-            // Instantiate the projectile at the position and rotation of this transform
-            GameObject clone;
-            clone = (GameObject)Instantiate(bullet, bulletExitPoint.position, bulletExitPoint.rotation);
+            if(Time.time - timeAtLastShot >= RateOfFire)
+            {
+                timeAtLastShot = Time.time;
+                Transform bulletExitPoint = GameObject.Find("BulletExitPoint").transform;
 
-            // Add force to the cloned object in the object's forward direction
-            clone.GetComponent<Rigidbody>().AddForce(clone.transform.up * BulletSpeed);
+                // Instantiate the projectile at the position and rotation of this transform
+                GameObject clone;
+                clone = (GameObject)Instantiate(bullet, bulletExitPoint.position, bulletExitPoint.rotation);
+
+                // Add force to the cloned object in the object's forward direction
+                clone.GetComponent<Rigidbody>().AddForce(clone.transform.up * BulletSpeed);
+            }
         }
     }
 }
