@@ -66,11 +66,6 @@ public class BulletCollision : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.name == "Cube")
-        {
-            col.GetComponent<GetHit>().GetHitByBullet();
-        }
-
         Destroy(gameObject);
     }
 

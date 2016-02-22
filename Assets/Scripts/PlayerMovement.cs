@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 lookPos;
     Rigidbody rigidBody;
 
-    public float Speed = 4;
+    public float Speed = 6;
+
+    public Transform camPos;
 
     void Start()
     {
@@ -21,12 +23,25 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.position += camPos.transform.forward * Time.deltaTime * Speed;
+        }
 
-        Vector3 movement = new Vector3(horizontal, 0, vertical);
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position -= camPos.transform.forward * Time.deltaTime * Speed;
+        }
 
-        rigidBody.AddForce(movement * Speed / Time.deltaTime);
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position -= camPos.transform.right * Time.deltaTime * Speed;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position += camPos.transform.right * Time.deltaTime * Speed;
+        }
 
     }
 
