@@ -21,7 +21,7 @@ public class FireGun : MonoBehaviour {
 
     private void ShootBullets()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetMouseButton(0))
         {
 
             if(Time.time - timeAtLastShot >= RateOfFire)

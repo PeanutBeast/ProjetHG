@@ -66,6 +66,8 @@ public class BulletCollision : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
+        //col.gameObject.GetComponent<GetHit>().GetHitByBullet();
+
         Destroy(gameObject);
     }
 
